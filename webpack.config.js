@@ -1,33 +1,15 @@
-const path = require('path');
+var webpack = require('webpack');
 module.exports = {
-    module: {
-        loaders: [
-            {
-                loader: "babel-loader",
-
-                include: [
-                    path.resolve(__dirname, "src"),
-                ],
-
-                test: /\.js?$/,
-
-                // Options to configure babel with
-                query: {
-                    presets: ['es2015'],
-                    plugins: ['transform-object-rest-spread']
-                }
-            },
-        ]
-    },
-    entry: {
-        "cpanel": ["./src/control-panel.js"],
-        "tasks": ["./src/tasks.js"]
-    },
+    entry: './src/control-panel.js',
     output: {
-        path: path.resolve(__dirname, "public"),
-        publicPath: "/assets/",
-        filename: "[name].bundle.js"
+       
+        filename: 'main.js'
     },
-    devServer: { inline: true },
-    devtool: 'source-map',
-}
+    module: {
+        rules: [{
+            test: /\.js$/,
+            exclude: /node_modules/,
+            loader: 'babel-loader',
+        }]
+    }
+};
